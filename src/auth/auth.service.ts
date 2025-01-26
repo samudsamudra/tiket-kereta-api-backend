@@ -1,9 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt'; // Pastikan JWT Service di-import
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { Pelanggan } from '../pelanggan/entities/pelanggan/pelanggan.entity';
 import { User } from '../users/entities/user/user.entity';
+import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
 @Injectable()
@@ -13,6 +15,7 @@ export class AuthService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Pelanggan)
     private readonly pelangganRepository: Repository<Pelanggan>,
+    private readonly jwtService: JwtService, // Tambahkan ini
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -75,5 +78,38 @@ export class AuthService {
     }
 
     return { message: 'Registrasi berhasil', role };
+  }
+
+  // Fungsi login
+  async login(loginDto: LoginDto) {
+    const { email, password } = loginDto;
+
+    // Cari user berdasarkan email
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (!user) {
+      throw new BadRequestException('Email atau password salah');
+    }
+
+    // Validasi password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new BadRequestException('Email atau password salah');
+    }
+
+    // Buat payload JWT
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    };
+
+    // Generate token
+    const token = this.jwtService.sign(payload);
+
+    return {
+      message: 'Login berhasil',
+      token,
+    };
   }
 }
