@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Pelanggan } from './entities/pelanggan/pelanggan.entity';
 import { UpdatePelangganDto } from './dto/update-pelanggan.dto'; // Ensure this file exists
+import { Pelanggan } from './entities/pelanggan.entity';
 
 @Injectable()
 export class PelangganService {

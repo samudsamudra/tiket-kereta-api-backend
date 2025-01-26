@@ -1,4 +1,4 @@
-import { Pelanggan } from '../../../pelanggan/entities/pelanggan/pelanggan.entity';
+import { Pelanggan } from '../../pelanggan/entities/pelanggan.entity';
 
 import {
   Column,

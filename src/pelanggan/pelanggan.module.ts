@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Pelanggan } from './entities/pelanggan/pelanggan.entity';
-import { PelangganService } from './pelanggan.service';
-import { PelangganController } from './pelanggan.controller';
 import { AuthModule } from '../auth/auth.module'; // Import AuthModule
+import { Pelanggan } from './entities/pelanggan.entity';
+import { PelangganController } from './pelanggan.controller';
+import { PelangganService } from './pelanggan.service';
 
 @Module({
   imports: [

@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { AppModule } from './app.module';
-import { Pelanggan } from './pelanggan/entities/pelanggan/pelanggan.entity';
-import { User } from './users/entities/user/user.entity';
+import { Pelanggan } from './pelanggan/entities/pelanggan.entity';
+import { User } from './users/entities/user.entity';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);

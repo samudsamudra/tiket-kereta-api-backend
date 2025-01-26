@@ -3,8 +3,8 @@ import { JwtService } from '@nestjs/jwt'; // Pastikan JWT Service di-import
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
-import { Pelanggan } from '../pelanggan/entities/pelanggan/pelanggan.entity';
-import { User } from '../users/entities/user/user.entity';
+import { Pelanggan } from '../pelanggan/entities/pelanggan.entity';
+import { User } from '../users/entities/user.entity';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
